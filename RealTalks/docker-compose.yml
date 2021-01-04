@@ -1,0 +1,85 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11
+    ports:
+       - '5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: asdr
+      POSTGRES_DB: RealTalks
+    networks:
+      - djangonetwork
+  api:
+    build: .
+    container_name: realtalks
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    environment:
+      - DB_HOST=db
+      - DB_NAME=RealTalks
+      - DB_USER=postgres
+      - DB_PASSWORD=asdr
+    ports:
+      - "8000:8000"
+    links:
+      - db:db
+    networks:
+      - djangonetwork
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+
+networks:
+  djangonetwork:
+    driver: bridge
+
+
+
+
+#version: "3.9"
+#
+#services:
+#  web:
+#    build: .
+#    command: python manage.py runserver 0.0.0.0:8000
+#    container_name: realtalks
+#    volumes:
+#      - .:/app
+#    ports:
+#      - "8000:8000"
+#    links:
+#      - db:db
+#    networks:
+#      - djangonetwork
+#
+#    depends_on:
+#      - db
+#  db:
+#    image: postgres
+##    restart: always
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data/
+#    environment:
+#      - POSTGRES_DB=RealTalks
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=asdr
+#      - POSTGRES_PORT=5432
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - djangonetwork
+#
+#volumes:
+#  postgres_data:
+#
+#networks:
+#  djangonetwork:
+#    driver: bridge
