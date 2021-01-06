@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    ##installed apps
+    'convo',
+
+    #third party apps
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +96,10 @@ CHANNEL_LAYERS = {
         'ROUTING': 'example_channels.routing.channel_routing',
     }
 }
+
+ASGI_APPLICATION = "RealTalks.asgi.application"
+
+# ASGI_APPLICATION = "routing.application"
 
 
 # docker-compose exec circle_b python manage.py check
