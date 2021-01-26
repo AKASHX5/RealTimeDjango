@@ -12,7 +12,5 @@ application = ProtocolTypeRouter(
                 RealTalks.convo.routing.websocket_urlpatterns
             )
         ),
-        "http": get_asgi_application(),
-
     }
 )

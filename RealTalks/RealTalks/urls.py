@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-import convo.urls
+# import convo.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat/', include("convo.urls")),
+    path('rp/', include("pdfreport.urls")),
+
 ]

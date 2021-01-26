@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     ##installed apps
     'convo',
+    'pdfreport',
 
     #third party apps
     'channels',
+
 ]
 
 MIDDLEWARE = [
@@ -89,17 +91,17 @@ DATABASES = {
 }
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             'hosts': [('localhost', 6379)],
         },
-        'ROUTING': 'example_channels.routing.channel_routing',
+        # 'ROUTING': 'example_channels.routing.channel_routing',
     }
 }
 
 ASGI_APPLICATION = "RealTalks.asgi.application"
 
-# ASGI_APPLICATION = "routing.application"
+# ASGI_APPLICATION = "RealTalks.RealTalks.routing.application"
 
 
 # docker-compose exec circle_b python manage.py check

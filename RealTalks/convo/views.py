@@ -5,7 +5,9 @@ def index(request, *args, **kwargs):
     context = {}
     return render(request,'index.html', {})
 
-def room(request, *args, **kwargs):
+def room(request, room_name):
     context = {}
-    return render(request,'chatroom.html', {})
+    return render(request,'chatroom.html', {
+        "room_name":room_name
+    })
 
